@@ -52,44 +52,61 @@ server = function(input, output){
                 colors = df))
   }
   
+  switches = reactiveValues(plotting = 0)
+  
+  observeEvent(input$summit, {
+    switches$plotting = input$summit
+  })  
+  
+  
   output$plot_01 = renderPlot({
-    if(input$summit %% 2){
-      ggplot() + 
-        geom_tile(data = color_extractor(url_png = input$input_image_url, colors = 5)[["data"]],
-                  aes(x = variable,
-                      y = line,
-                      fill = rgb(Red, Green, Blue))) + 
-        scale_fill_identity() +
-        scale_x_continuous(expand = c(0, 0)) + 
-        scale_y_continuous(expand = c(0, 0)) + 
-        theme(legend.position = "none",
-              axis.title = element_blank(),
-              axis.text = element_blank())
-    } else {
+    if(switches$plotting == FALSE){
       ggplot() + 
         theme(plot.background = element_blank(),
               panel.background = element_blank())
+    } else {
+      isolate({
+        ggplot() + 
+          geom_tile(data = color_extractor(url_png = input$input_image_url, colors = 5)[["data"]],
+                    aes(x = variable,
+                        y = line,
+                        fill = rgb(Red, Green, Blue))) + 
+          scale_fill_identity() +
+          scale_x_continuous(expand = c(0, 0)) + 
+          scale_y_continuous(expand = c(0, 0)) + 
+          theme(legend.position = "none",
+                axis.title = element_blank(),
+                axis.text = element_blank())
+      })
     }
   })
   
   output$plot_02 = renderPlot({
-    if(input$summit %% 2){
-      color_extractor(url_png = input$input_image_url, colors = input$input_color_n)[["plot"]]
+    if(switches$plotting == FALSE){
+      ggplot() + 
+        theme(plot.background = element_blank(),
+              panel.background = element_blank())
     } else {
-      qplot(1, 1)
+      isolate({
+        color_extractor(url_png = input$input_image_url,
+                        colors  = input$input_color_n)[["plot"]]
+      })
     }
   })
   
   
   output$DT = renderDataTable({
-    if(input$summit %% 2){
-      color_extractor(url_png = input$input_image_url, colors = input$input_color_n)[["colors"]]
-    } else {
+    if(switches$plotting == FALSE){
       data.frame(obs = 1:3,
                  Red = 1,
                  Green = 1,
                  Blue = 1,
                  Hex = "#FFFFFF")
+    } else {
+      isolate({
+        color_extractor(url_png = input$input_image_url,
+                        colors  = input$input_color_n)[["colors"]] 
+      })
     }
   }, options = list(autoWidth = TRUE,
                     scrollX   = TRUE,
