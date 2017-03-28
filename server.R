@@ -1,6 +1,7 @@
 # server
 library("shiny")
 library("wordcloud2")
+library("rhandsontable")
 library("NISTunits")
 
 server = function(input, output){
