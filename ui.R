@@ -1,7 +1,6 @@
-# shinyApp(ui, server)
-
 # ui
 library("shiny")
+library("wordcloud2")
 library("rhandsontable")
 
 ui = fluidPage(titlePanel("Wordcloud2"),
