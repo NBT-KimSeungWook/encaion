@@ -107,6 +107,13 @@ cc = c(img[200,,, 1])
 dd = imcol(R(img), 200)
 sum(cc == dd)/length(cc)
 
+
+# 값을 반올림?
+# 어차피 RGB 값은 각각 0부터 1사이의 값을 가지고 있다.
+# 단위 함수로 만들어버리면 오히려 처리하기 쉬울 수 있다.
+# 그런데... 원(점)이 선명하지 않고 색이 얼룩덜룩하면?..
+# 점이 겹쳐있으면?
+
 #### 참고 사이트 ####
 # https://dahtah.github.io/imager/imager.html
 # https://cran.r-project.org/web/packages/imager/vignettes/gettingstarted.html
