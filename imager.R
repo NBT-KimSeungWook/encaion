@@ -93,9 +93,13 @@ deriche(im = img_2, sigma = 1, order = 2, axis = "x") %>%
   plot(axes = FALSE)
 
 
-# Mclust!!!
+ggplot() + 
+  geom_line(aes(x = 1:dim(img)[1],
+                y = imrow(R(img), 30)))
 
 
 #### 참고 사이트 ####
 # https://dahtah.github.io/imager/imager.html
 # https://cran.r-project.org/web/packages/imager/vignettes/gettingstarted.html
+# https://cran.r-project.org/web/packages/magick/vignettes/intro.html
+# http://darkpgmr.tistory.com/132
