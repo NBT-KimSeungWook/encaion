@@ -97,6 +97,15 @@ ggplot() +
   geom_line(aes(x = 1:dim(img)[1],
                 y = imrow(R(img), 30)))
 
+# imrow로 데이터를 뽑아볼까?
+aa = c(img[, 200,, 1])
+bb = imrow(R(img), 200)
+sum(aa == bb)/length(aa)
+
+# imcol은?
+cc = c(img[200,,, 1])
+dd = imcol(R(img), 200)
+sum(cc == dd)/length(cc)
 
 #### 참고 사이트 ####
 # https://dahtah.github.io/imager/imager.html
