@@ -81,6 +81,8 @@ deriche(im = img_2, sigma = 1, order = 2, axis = "x") %>%
   plot(axes = FALSE)
 
 
+# Mclust!!!
+
 
 #### 참고 사이트 ####
 # https://dahtah.github.io/imager/imager.html
