@@ -1,6 +1,7 @@
 #### reading ####
 # install.packages("imager")
 library("imager")
+library("ggplot2)
 
 img = load.image("counting_dots_lssacLee.jpg")
 plot(img, axes = FALSE)
@@ -10,6 +11,17 @@ dim(img)
 
 # load.image() 함수로 불러온 객체는 4차원 행렬이다.
 img[,,1,]
+
+img_melt = reshape2::melt(img[,,1,])
+
+ggplot() + 
+  geom_tile(data = img_melt,
+            aes(x = Var1,
+                y = Var2,
+                fill = as.factor(value))) + 
+  scale_fill_grey() + 
+  theme(legend.position = "none")
+
 
 
 #### blur 처리 ####
